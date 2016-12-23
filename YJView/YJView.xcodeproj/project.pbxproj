@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63ACD11F1E0D329E001B8A3A /* YJTableViewGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACD11E1E0D329E001B8A3A /* YJTableViewGenerator.m */; };
+		63ACD1221E0D32C2001B8A3A /* YJTouchLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACD1211E0D32C2001B8A3A /* YJTouchLabel.m */; };
 		63B54B111E0D029700C94151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B54B101E0D029700C94151 /* main.m */; };
 		63B54B141E0D029700C94151 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B54B131E0D029700C94151 /* AppDelegate.m */; };
 		63B54B171E0D029700C94151 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B54B161E0D029700C94151 /* ViewController.m */; };
@@ -16,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63ACD11D1E0D329E001B8A3A /* YJTableViewGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJTableViewGenerator.h; sourceTree = "<group>"; };
+		63ACD11E1E0D329E001B8A3A /* YJTableViewGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJTableViewGenerator.m; sourceTree = "<group>"; };
+		63ACD1201E0D32C2001B8A3A /* YJTouchLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJTouchLabel.h; sourceTree = "<group>"; };
+		63ACD1211E0D32C2001B8A3A /* YJTouchLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJTouchLabel.m; sourceTree = "<group>"; };
 		63B54B0C1E0D029700C94151 /* YJView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B54B101E0D029700C94151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63B54B121E0D029700C94151 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -39,6 +45,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63ACD11B1E0D3280001B8A3A /* UITableViewGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				63ACD11D1E0D329E001B8A3A /* YJTableViewGenerator.h */,
+				63ACD11E1E0D329E001B8A3A /* YJTableViewGenerator.m */,
+			);
+			path = UITableViewGenerator;
+			sourceTree = "<group>";
+		};
+		63ACD11C1E0D3280001B8A3A /* YJViews */ = {
+			isa = PBXGroup;
+			children = (
+				63ACD1201E0D32C2001B8A3A /* YJTouchLabel.h */,
+				63ACD1211E0D32C2001B8A3A /* YJTouchLabel.m */,
+			);
+			path = YJViews;
+			sourceTree = "<group>";
+		};
 		63B54B031E0D029700C94151 = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +82,8 @@
 		63B54B0E1E0D029700C94151 /* YJView */ = {
 			isa = PBXGroup;
 			children = (
+				63ACD11B1E0D3280001B8A3A /* UITableViewGenerator */,
+				63ACD11C1E0D3280001B8A3A /* YJViews */,
 				63B54B121E0D029700C94151 /* AppDelegate.h */,
 				63B54B131E0D029700C94151 /* AppDelegate.m */,
 				63B54B151E0D029700C94151 /* ViewController.h */,
@@ -153,6 +179,8 @@
 			files = (
 				63B54B171E0D029700C94151 /* ViewController.m in Sources */,
 				63B54B141E0D029700C94151 /* AppDelegate.m in Sources */,
+				63ACD1221E0D32C2001B8A3A /* YJTouchLabel.m in Sources */,
+				63ACD11F1E0D329E001B8A3A /* YJTableViewGenerator.m in Sources */,
 				63B54B111E0D029700C94151 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +338,7 @@
 				63B54B251E0D029700C94151 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
