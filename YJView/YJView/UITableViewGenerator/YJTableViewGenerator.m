@@ -41,6 +41,7 @@
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.rowHeight = rowHeight;
+    tableView.tableFooterView = [UIView new];
     [controller.view addSubview:tableView];
     return tableView;
 }

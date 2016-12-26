@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "YJTableViewGenerator.h"
 
 @interface ViewController ()
 
@@ -16,13 +17,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self _setUpMainNavgationView];
+    [self _setUpMainMainView];
+    [self _loadMainDataFormServer];
+}
+
+- (void)_setUpMainNavgationView{
+    self.navigationItem.title = @"自定义View";
+}
+
+- (void)_setUpMainMainView{
+    
+    NSArray * dataSource = @[@"可点击的Label"];
+    __weak typeof(self) weakSelf = self;
+    [[YJTableViewGenerator shareInstance] createTableViewWithDataSource:dataSource rowHeight:44 inController:self didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
+        [weakSelf tableView:tableView didSelectRow:indexPath];
+    } didScrollBlock:^(UIScrollView *tableView, CGPoint contentOffset) {
+        
+    }];
+}
+
+-(void)_loadMainDataFormServer{
+    
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - RealAction
+- (void)tableView:(UITableView *)tableView didSelectRow:(NSIndexPath *)indexPath{
+    NSLog(@"-->%ld", indexPath.row);
 }
 
 

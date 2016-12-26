@@ -13,6 +13,7 @@ typedef void(^didScrollHandleBlock)(UIScrollView *tableView, CGPoint contentOffs
 
 @interface YJTableViewGenerator : NSObject
 
++ (YJTableViewGenerator *)shareInstance;
 
 /** 创建tableView */
 - (UITableView *)createTableViewWithDataSource:(NSArray *)dataSource
