@@ -9,14 +9,17 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^didSelectRowHandleBlock)(UITableView *tableView, NSIndexPath *indexPath);
-typedef void(^didScrollHandleBlock)(UITableView *tableView, CGPoint contentOffset);
+typedef void(^didScrollHandleBlock)(UIScrollView *tableView, CGPoint contentOffset);
 
 @interface YJTableViewGenerator : NSObject
 
 
-+ (UITableView *)createRandomTableViewAtController:(UIViewController *)controller
-                                 didSelectedHandle:(SelectedHandle)selectedHandle
-                                   didScrollHandle:(ScrollHandle)scrollHandle;
+/** 创建tableView */
+- (UITableView *)createTableViewWithDataSource:(NSArray *)dataSource
+                                     rowHeight:(CGFloat)rowHeight
+                                  inController:(UIViewController *)controller
+                             didSelectRowBlock:(didSelectRowHandleBlock)didSelectRowBlock
+                                didScrollBlock:(didScrollHandleBlock)didScrollBlock;
 
 
 @end
