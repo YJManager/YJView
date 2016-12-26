@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^didSelectRowHandleBlock)(UITableView *tableView, NSIndexPath *indexPath);
+typedef void(^didScrollHandleBlock)(UITableView *tableView, CGPoint contentOffset);
+
 @interface YJTableViewGenerator : NSObject
 
-typedef void(^SelectedHandle)(UITableView *tableView, NSIndexPath *indexPath);
-typedef void(^ScrollHandle)(UIScrollView *scrollView, CGPoint contentOffset);
 
 + (UITableView *)createRandomTableViewAtController:(UIViewController *)controller
                                  didSelectedHandle:(SelectedHandle)selectedHandle

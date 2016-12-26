@@ -8,25 +8,25 @@
 
 #import "YJTableViewGenerator.h"
 
-static NSMutableArray *_array;
 @interface YJTableViewGenerator () <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, strong) NSMutableArray *dataSource; /**< 数据源 */
+@property (nonatomic, copy) didSelectRowHandleBlock didselectRowBlock; /**< 点击row */
+@property (nonatomic, copy) didScrollHandleBlock didScrollBlock; /**< 滚动block */
 
 @end
 
-@implementation YJTableViewGenerator{
-    SelectedHandle _selectedHandle;
-    ScrollHandle _scrollHandle;
+@implementation YJTableViewGenerator
+
++ (YJTableViewGenerator *)shareInstance{
+    static YJTableViewGenerator *_instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[YJTableViewGenerator alloc] init];
+    });
+    return _instance;
 }
 
-+ (void)initialize {
-    _array = [NSMutableArray array];
-}
-
-+ (instancetype)shareInstance {
-    id instance = [self new];
-    [_array addObject:instance];
-    return instance;
-}
 
 + (UITableView *)createRandomTableViewAtController:(UIViewController *)controller
                                  didSelectedHandle:(SelectedHandle)selectedHandle
@@ -63,6 +63,14 @@ static NSMutableArray *_array;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     _scrollHandle(scrollView, scrollView.contentOffset);
+}
+
+#pragma mark - Lazy
+- (NSMutableArray *)dataSource{
+    if (_dataSource == nil) {
+        _dataSource = [NSMutableArray array];
+    }
+    return _dataSource;
 }
 
 
