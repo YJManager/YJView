@@ -9,26 +9,13 @@
 #import "YJTableViewGenerator.h"
 
 static NSMutableArray *_array;
-@interface YJTableViewGenerator () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
+@interface YJTableViewGenerator () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 @implementation YJTableViewGenerator{
     SelectedHandle _selectedHandle;
     ScrollHandle _scrollHandle;
-    CGFloat refrenceRed;
-    CGFloat refrenceGreen;
-    CGFloat refrenceBlue;
-}
-
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        refrenceRed = (arc4random() % 255) / 255.0;
-        refrenceGreen = (arc4random() % 255) / 255.0;
-        refrenceBlue = (arc4random() % 255) / 255.0;
-    }
-    return self;
 }
 
 + (void)initialize {
@@ -64,11 +51,7 @@ static NSMutableArray *_array;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class]) forIndexPath:indexPath];
     cell.textLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
-    NSInteger offset = 40;
-    CGFloat red = (int)(arc4random() % (offset * 2) - offset) / 255.0 + refrenceRed;
-    CGFloat green = (int)(arc4random() % (offset * 2) - offset) / 255.0 + refrenceGreen;
-    CGFloat blue = (int)(arc4random() % (offset * 2) - offset) / 255.0 + refrenceBlue;
-    cell.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:1];
+    cell.backgroundColor = [UIColor whiteColor];
     
     return cell;
 }
