@@ -11,6 +11,7 @@
 @class YJTouchLabel;
 @protocol YJTouchLabelDelegate <NSObject>
 
+@optional
 /** 点击index */
 - (void)touchLabel:(YJTouchLabel *)label toucheBegan:(UITouch *)touch onCharacterAtIndex:(NSInteger)index;
 /** 移动 */
