@@ -2,8 +2,8 @@
 //  YJTouchLabel.m
 //  YJView
 //
-//  Created by YJHou on 2016/12/23.
-//  Copyright © 2016年 YJHou. All rights reserved.
+//  Created by YJHou on 2014/11/23.
+//  Copyright © 2014年 YJHou. All rights reserved.
 //
 
 #import "YJTouchLabel.h"
@@ -31,41 +31,38 @@
     return self;
 }
 
-- (CFIndex)characterIndexAtPoint:(CGPoint)point {
+- (CFIndex)characterIndexAtPoint:(CGPoint)point{
     
     NSMutableAttributedString *optimizedAttributedText = [self.attributedText mutableCopy];
     
-    [self.attributedText enumerateAttribute:(NSString*)kCTParagraphStyleAttributeName inRange:NSMakeRange(0, [optimizedAttributedText length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
+    // 统一换行模式
+    [self.attributedText enumerateAttribute:(NSString *)kCTParagraphStyleAttributeName inRange:NSMakeRange(0, optimizedAttributedText.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
         
-        NSMutableParagraphStyle* paragraphStyle = [value mutableCopy];
+        NSMutableParagraphStyle *paragraphStyle = [value mutableCopy];
         
-        if ([paragraphStyle lineBreakMode] == kCTLineBreakByTruncatingTail) {
-            [paragraphStyle setLineBreakMode:kCTLineBreakByWordWrapping];
+        if (paragraphStyle.lineBreakMode == NSLineBreakByTruncatingTail) {
+            paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         }
         
-        [optimizedAttributedText removeAttribute:(NSString*)kCTParagraphStyleAttributeName range:range];
-        [optimizedAttributedText addAttribute:(NSString*)kCTParagraphStyleAttributeName value:paragraphStyle range:range];
+        [optimizedAttributedText removeAttribute:(NSString *)kCTParagraphStyleAttributeName range:range];
+        [optimizedAttributedText addAttribute:(NSString *)kCTParagraphStyleAttributeName value:paragraphStyle range:range];
         
     }];
     
-    ////////
     
     if (!CGRectContainsPoint(self.bounds, point)) {
         return NSNotFound;
     }
     
-    CGRect textRect = [self textRect];
+    CGRect textRect = [self textRectValue];
     
     if (!CGRectContainsPoint(textRect, point)) {
         return NSNotFound;
     }
     
-    // Offset tap coordinates by textRect origin to make them relative to the origin of frame
+    // 求出触摸点和文本显示的坐标点
     point = CGPointMake(point.x - textRect.origin.x, point.y - textRect.origin.y);
-    // Convert tap coordinates (start at top left) to CT coordinates (start at bottom left)
     point = CGPointMake(point.x, textRect.size.height - point.y);
-    
-    //////
     
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)optimizedAttributedText);
     
@@ -80,10 +77,7 @@
     }
     
     CFArrayRef lines = CTFrameGetLines(frame);
-    
-    NSInteger numberOfLines = self.numberOfLines > 0 ? MIN(self.numberOfLines, CFArrayGetCount(lines)) : CFArrayGetCount(lines);
-    
-    //NSLog(@"num lines: %d", numberOfLines);
+    NSInteger numberOfLines = self.numberOfLines > 0?MIN(self.numberOfLines, CFArrayGetCount(lines)):CFArrayGetCount(lines);
     
     if (numberOfLines == 0) {
         CFRelease(frame);
@@ -133,64 +127,57 @@
     return idx;
 }
 
-#pragma mark --
-
-- (CGRect)textRect {
-    
+#pragma mark - SettingSupport
+- (CGRect)textRectValue{
     CGRect textRect = [self textRectForBounds:self.bounds limitedToNumberOfLines:self.numberOfLines];
-    textRect.origin.y = (self.bounds.size.height - textRect.size.height)/2;
-    
+    textRect.origin.y = (self.bounds.size.height - textRect.size.height) * 0.5;
     if (self.textAlignment == NSTextAlignmentCenter) {
-        textRect.origin.x = (self.bounds.size.width - textRect.size.width)/2;
-    }
-    if (self.textAlignment == NSTextAlignmentRight) {
+        textRect.origin.x = (self.bounds.size.width - textRect.size.width) * 0.5;
+    }else if (self.textAlignment == NSTextAlignmentRight){
         textRect.origin.x = self.bounds.size.width - textRect.size.width;
     }
-    
     return textRect;
 }
 
-
-#pragma mark --
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+#pragma mark -- Action
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     UITouch *touch = [touches anyObject];
     CFIndex index = [self characterIndexAtPoint:[touch locationInView:self]];
-    
-    [self.delegate label:self didBeginTouch:touch onCharacterAtIndex:index];
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(touchLabel:toucheBegan:onCharacterAtIndex:)]) {
+        [self.delegate touchLabel:self toucheBegan:touch onCharacterAtIndex:index];
+    }
     [super touchesBegan:touches withEvent:event];
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     UITouch *touch = [touches anyObject];
     CFIndex index = [self characterIndexAtPoint:[touch locationInView:self]];
-    
-    [self.delegate label:self didMoveTouch:touch onCharacterAtIndex:index];
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(touchLabel:toucheMoved:onCharacterAtIndex:)]) {
+        [self.delegate touchLabel:self toucheMoved:touch onCharacterAtIndex:index];
+    }
     [super touchesMoved:touches withEvent:event];
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     UITouch *touch = [touches anyObject];
     CFIndex index = [self characterIndexAtPoint:[touch locationInView:self]];
-    
-    [self.delegate label:self didEndTouch:touch onCharacterAtIndex:index];
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(touchLabel:toucheEnded:onCharacterAtIndex:)]) {
+        [self.delegate touchLabel:self toucheEnded:touch onCharacterAtIndex:index];
+    }
     [super touchesEnded:touches withEvent:event];
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     UITouch *touch = [touches anyObject];
-    
-    [self.delegate label:self didCancelTouch:touch];
-    
+    CFIndex index = [self characterIndexAtPoint:[touch locationInView:self]];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(touchLabel:toucheCancelled:onCharacterAtIndex:)]) {
+        [self.delegate touchLabel:self toucheCancelled:touch onCharacterAtIndex:index];
+    }
     [super touchesCancelled:touches withEvent:event];
 }
-
 
 @end
