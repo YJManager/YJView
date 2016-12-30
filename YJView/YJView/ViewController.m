@@ -34,7 +34,7 @@
     [[YJTableViewGenerator shareInstance] createTableViewWithDataSource:dataSource rowHeight:44 inController:self didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
         [weakSelf tableView:tableView didSelectRow:indexPath];
     } didScrollBlock:^(UIScrollView *tableView, CGPoint contentOffset) {
-        
+        [weakSelf scrollView:tableView contentOffset:contentOffset];
     }];
 }
 
@@ -50,6 +50,10 @@
 #pragma mark - RealAction
 - (void)tableView:(UITableView *)tableView didSelectRow:(NSIndexPath *)indexPath{
     NSLog(@"-->%ld", indexPath.row);
+}
+
+- (void)scrollView:(UIScrollView *)tableView contentOffset:(CGPoint)contentOffset{
+//    NSLog(@"Point-->%@", NSStringFromCGPoint(contentOffset));
 }
 
 

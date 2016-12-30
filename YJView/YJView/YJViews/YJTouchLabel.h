@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol YJTouchLabelDelegate <NSObject>
+
+
+@end
+
 @interface YJTouchLabel : UILabel
+
+@property (nonatomic, weak) id<YJTouchLabelDelegate> delegate;
 
 @end
