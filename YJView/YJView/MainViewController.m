@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "YJTableViewGenerator.h"
 #import "TouchLinkLabelViewController.h"
+#import "PlaceholderTextViewController.h"
 
 @interface MainViewController ()
 
@@ -30,7 +31,9 @@
 
 - (void)_setUpMainMainView{
     
-    NSArray * dataSource = @[@"可点击和超链接Label"];
+    NSArray * dataSource = @[@"可点击和超链接Label",
+                             @"带有Placeholder的TextView"
+                             ];
     __weak typeof(self) weakSelf = self;
     [[YJTableViewGenerator shareInstance] createTableViewWithDataSource:dataSource rowHeight:44 inController:self didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
         [weakSelf tableView:tableView didSelectRow:indexPath];
@@ -54,6 +57,9 @@
     UIViewController *pushingController = nil;
     if (index == 0) {
         TouchLinkLabelViewController *vc = [[TouchLinkLabelViewController alloc] init];
+        pushingController = vc;
+    }else if (index == 1){
+        PlaceholderTextViewController *vc = [[PlaceholderTextViewController alloc] init];
         pushingController = vc;
     }
     

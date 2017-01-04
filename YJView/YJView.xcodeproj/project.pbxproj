@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63830BDC1E1CC0D000BB8FED /* YJTouchLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63830BDB1E1CC0D000BB8FED /* YJTouchLabel.m */; };
+		63830BDF1E1CC10500BB8FED /* YJPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63830BDE1E1CC10500BB8FED /* YJPlaceholderTextView.m */; };
+		63830BE71E1CC1DB00BB8FED /* PlaceholderTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63830BE61E1CC1DB00BB8FED /* PlaceholderTextViewController.m */; };
 		63A4B2E91E16535300067379 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A4B2E81E16535300067379 /* MainViewController.m */; };
 		63A4B2F01E16542A00067379 /* TouchLinkLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A4B2EF1E16542A00067379 /* TouchLinkLabelViewController.m */; };
 		63ACD11F1E0D329E001B8A3A /* YJTableViewGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACD11E1E0D329E001B8A3A /* YJTableViewGenerator.m */; };
-		63ACD1221E0D32C2001B8A3A /* YJTouchLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACD1211E0D32C2001B8A3A /* YJTouchLabel.m */; };
 		63B54B111E0D029700C94151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B54B101E0D029700C94151 /* main.m */; };
 		63B54B141E0D029700C94151 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B54B131E0D029700C94151 /* AppDelegate.m */; };
 		63B54B1A1E0D029700C94151 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63B54B181E0D029700C94151 /* Main.storyboard */; };
@@ -19,6 +21,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63830BDA1E1CC0D000BB8FED /* YJTouchLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJTouchLabel.h; sourceTree = "<group>"; };
+		63830BDB1E1CC0D000BB8FED /* YJTouchLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJTouchLabel.m; sourceTree = "<group>"; };
+		63830BDD1E1CC10500BB8FED /* YJPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJPlaceholderTextView.h; sourceTree = "<group>"; };
+		63830BDE1E1CC10500BB8FED /* YJPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJPlaceholderTextView.m; sourceTree = "<group>"; };
+		63830BE51E1CC1DB00BB8FED /* PlaceholderTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceholderTextViewController.h; sourceTree = "<group>"; };
+		63830BE61E1CC1DB00BB8FED /* PlaceholderTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderTextViewController.m; sourceTree = "<group>"; };
 		63A4B2E71E16535300067379 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		63A4B2E81E16535300067379 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		63A4B2EE1E16542A00067379 /* TouchLinkLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchLinkLabelViewController.h; sourceTree = "<group>"; };
@@ -26,8 +34,6 @@
 		63A4B2F11E1655F600067379 /* YJViewPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJViewPrefixHeader.pch; sourceTree = "<group>"; };
 		63ACD11D1E0D329E001B8A3A /* YJTableViewGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJTableViewGenerator.h; sourceTree = "<group>"; };
 		63ACD11E1E0D329E001B8A3A /* YJTableViewGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJTableViewGenerator.m; sourceTree = "<group>"; };
-		63ACD1201E0D32C2001B8A3A /* YJTouchLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJTouchLabel.h; sourceTree = "<group>"; };
-		63ACD1211E0D32C2001B8A3A /* YJTouchLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJTouchLabel.m; sourceTree = "<group>"; };
 		63B54B0C1E0D029700C94151 /* YJView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63B54B101E0D029700C94151 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63B54B121E0D029700C94151 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -49,6 +55,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63830BD81E1CC0D000BB8FED /* YJPlaceholderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				63830BDD1E1CC10500BB8FED /* YJPlaceholderTextView.h */,
+				63830BDE1E1CC10500BB8FED /* YJPlaceholderTextView.m */,
+			);
+			path = YJPlaceholderTextView;
+			sourceTree = "<group>";
+		};
+		63830BD91E1CC0D000BB8FED /* YJTouchLabel */ = {
+			isa = PBXGroup;
+			children = (
+				63830BDA1E1CC0D000BB8FED /* YJTouchLabel.h */,
+				63830BDB1E1CC0D000BB8FED /* YJTouchLabel.m */,
+			);
+			path = YJTouchLabel;
+			sourceTree = "<group>";
+		};
+		63830BE01E1CC18F00BB8FED /* PlaceholderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				63830BE11E1CC18F00BB8FED /* Controller */,
+			);
+			path = PlaceholderTextView;
+			sourceTree = "<group>";
+		};
+		63830BE11E1CC18F00BB8FED /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				63830BE51E1CC1DB00BB8FED /* PlaceholderTextViewController.h */,
+				63830BE61E1CC1DB00BB8FED /* PlaceholderTextViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		63A4B2EA1E16541400067379 /* TouchAndLinkLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,8 +135,8 @@
 		63ACD11C1E0D3280001B8A3A /* YJViews */ = {
 			isa = PBXGroup;
 			children = (
-				63ACD1201E0D32C2001B8A3A /* YJTouchLabel.h */,
-				63ACD1211E0D32C2001B8A3A /* YJTouchLabel.m */,
+				63830BD81E1CC0D000BB8FED /* YJPlaceholderTextView */,
+				63830BD91E1CC0D000BB8FED /* YJTouchLabel */,
 			);
 			path = YJViews;
 			sourceTree = "<group>";
@@ -119,6 +160,7 @@
 		63B54B0E1E0D029700C94151 /* YJView */ = {
 			isa = PBXGroup;
 			children = (
+				63830BE01E1CC18F00BB8FED /* PlaceholderTextView */,
 				63A4B2EA1E16541400067379 /* TouchAndLinkLabel */,
 				63ACD11B1E0D3280001B8A3A /* UITableViewGenerator */,
 				63ACD11C1E0D3280001B8A3A /* YJViews */,
@@ -217,8 +259,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				63A4B2E91E16535300067379 /* MainViewController.m in Sources */,
+				63830BE71E1CC1DB00BB8FED /* PlaceholderTextViewController.m in Sources */,
+				63830BDF1E1CC10500BB8FED /* YJPlaceholderTextView.m in Sources */,
+				63830BDC1E1CC0D000BB8FED /* YJTouchLabel.m in Sources */,
 				63B54B141E0D029700C94151 /* AppDelegate.m in Sources */,
-				63ACD1221E0D32C2001B8A3A /* YJTouchLabel.m in Sources */,
 				63A4B2F01E16542A00067379 /* TouchLinkLabelViewController.m in Sources */,
 				63ACD11F1E0D329E001B8A3A /* YJTableViewGenerator.m in Sources */,
 				63B54B111E0D029700C94151 /* main.m in Sources */,
