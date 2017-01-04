@@ -10,6 +10,7 @@
 #import "YJTableViewGenerator.h"
 #import "TouchLinkLabelViewController.h"
 #import "PlaceholderTextViewController.h"
+#import "YJFormViewController.h"
 
 @interface MainViewController ()
 
@@ -32,7 +33,8 @@
 - (void)_setUpMainMainView{
     
     NSArray * dataSource = @[@"可点击和超链接Label",
-                             @"带有Placeholder的TextView"
+                             @"带有Placeholder的TextView",
+                             @"原生的表格"
                              ];
     __weak typeof(self) weakSelf = self;
     [[YJTableViewGenerator shareInstance] createTableViewWithDataSource:dataSource rowHeight:44 inController:self didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
@@ -60,6 +62,9 @@
         pushingController = vc;
     }else if (index == 1){
         PlaceholderTextViewController *vc = [[PlaceholderTextViewController alloc] init];
+        pushingController = vc;
+    }else if (index == 2){
+        YJFormViewController *vc = [[YJFormViewController alloc] init];
         pushingController = vc;
     }
     
