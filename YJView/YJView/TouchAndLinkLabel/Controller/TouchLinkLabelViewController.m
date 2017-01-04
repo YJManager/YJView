@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) YJTouchLabel *touchLabel; /**< 可点击的label */
 @property (nonatomic, strong) YJTouchLabel *linkLabel; /**< 可点击的label */
+@property(nonatomic, strong) NSArray *matches;
 
 @end
 
@@ -23,15 +24,19 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.touchLabel];
     [self.view addSubview:self.linkLabel];
+    
+    NSError *error = NULL;
+    NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:&error];
+    self.matches = [detector matchesInString:self.linkLabel.text options:0 range:NSMakeRange(0, self.linkLabel.text.length)];
+    [self highlightLinksWithIndex:NSNotFound];
 }
-
 
 #pragma mark - YJTouchLabelDelegate
 - (void)touchLabel:(YJTouchLabel *)label toucheBegan:(UITouch *)touch onCharacterAtIndex:(CFIndex)index{
     if (label == self.touchLabel) {
         [self touchLabel:label highlightCharacterAtIndex:index];
     }else if (label == self.linkLabel){
-    
+        [self highlightLinksWithIndex:index];
     }
 }
 
@@ -39,7 +44,7 @@
     if (label == self.touchLabel) {
         [self touchLabel:label highlightCharacterAtIndex:index];
     }else if (label == self.linkLabel){
-        
+        [self highlightLinksWithIndex:index];
     }
 }
 
@@ -47,7 +52,18 @@
     if (label == self.touchLabel) {
         [self removeHighlightWithLabel:label];
     }else if (label == self.linkLabel){
-        
+        [self highlightLinksWithIndex:NSNotFound];
+        for (NSTextCheckingResult *match in self.matches) {
+            if ([match resultType] == NSTextCheckingTypeLink) {
+                
+                NSRange matchRange = [match range];
+                if ([self isIndex:index inRange:matchRange]) {
+                    
+                    [[UIApplication sharedApplication] openURL:match.URL];
+                    break;
+                }
+            }
+        }
     }
 }
 
@@ -55,7 +71,7 @@
     if (label == self.touchLabel) {
         [self removeHighlightWithLabel:label];
     }else if (label == self.linkLabel){
-        
+        [self highlightLinksWithIndex:NSNotFound];
     }
 }
 
@@ -116,6 +132,28 @@
     }
 }
 
+- (BOOL)isIndex:(CFIndex)index inRange:(NSRange)range {
+    return index > range.location && index < range.location+range.length;
+}
+
+#pragma mark - Link
+- (void)highlightLinksWithIndex:(CFIndex)index {
+    
+    NSMutableAttributedString* attributedString = [self.linkLabel.attributedText mutableCopy];
+    for (NSTextCheckingResult *match in self.matches) {
+        if ([match resultType] == NSTextCheckingTypeLink) {
+            NSRange matchRange = [match range];
+            if ([self isIndex:index inRange:matchRange]) {
+                [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:matchRange];
+            }else {
+                [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:matchRange];
+            }
+            [attributedString addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:matchRange];
+        }
+    }
+    self.linkLabel.attributedText = attributedString;
+}
+
 #pragma mark - Lazy
 - (YJTouchLabel *)touchLabel{
     if (_touchLabel == nil) {
@@ -133,6 +171,7 @@
         _linkLabel = [[YJTouchLabel alloc] initWithFrame:CGRectMake(0, kSCREEN_HEIGHT * 0.5, kSCREEN_WIDTH, kSCREEN_HEIGHT * 0.5)];
         _linkLabel.layer.borderWidth = 1;
         _linkLabel.numberOfLines = 0;
+        _linkLabel.text = @"是中国 最专业 最有数据凝聚力的http://www.baidu.com 移动开发 者服务平台 友盟以移动应用www.2345.com 统计分析为产品起点 发展成为提 供从基础设置搭 建-开发-运营服务的 整合服务平台 致力于为移动开发 者提供专业的数据统计分析 开发和运营组件及推广服务 2013年10月推出“一站式“解决方案，服务包含移 动用统计分析以 及细分行的移动 游戏统计分析 社会化分享组件 消息推送 自动更新 用户反馈错误分析等产品";
         _linkLabel.layer.borderColor = [UIColor grayColor].CGColor;
         _linkLabel.delegate = self;
     }
