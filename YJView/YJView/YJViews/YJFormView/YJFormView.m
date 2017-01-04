@@ -42,16 +42,25 @@
     self.dy = 0;
 }
 
-- (void)addRecord: (NSArray*)record {
-    if(record.count != self.columnWidths.count){
-        NSLog(@"!!! Number of items does not match number of columns. !!!");
-        return;
+- (void)addRecord: (NSArray *)records {
+    
+    NSMutableArray *contents = [NSMutableArray arrayWithArray:records];
+    // 容错处理
+    NSInteger distanceCount = self.columnWidths.count - contents.count;
+    
+    if (distanceCount > 0) { // 数据不够
+        for (NSInteger i = 0; i < distanceCount; i++) {
+            [contents addObject:@""];
+        }
+    }else if (distanceCount < 0){ // 数据超了
+        [contents removeObjectsInRange:NSMakeRange(self.columnWidths.count, -distanceCount)];
     }
+    
     uint rowHeight = 30;
     uint dx = 0;
     NSMutableArray* labels = [[NSMutableArray alloc] init];
     //CREATE THE ITEMS/COLUMNS OF THE ROW
-    for(uint i=0; i<record.count; i++){
+    for(uint i = 0; i < contents.count; i++){
         float colWidth = [[self.columnWidths objectAtIndex:i] floatValue];//colwidth as given at setup
         CGRect rect = CGRectMake(dx, self.dy, colWidth, rowHeight);
         //ADJUST X FOR BORDER OVERLAPPING BETWEEN COLUMNS
@@ -75,7 +84,7 @@
             style.alignment = NSTextAlignmentCenter;
             col1.backgroundColor = [UIColor colorWithWhite:0.961 alpha:1.000];
         }
-        NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:[record objectAtIndex:i] attributes:@{NSParagraphStyleAttributeName : style}];
+        NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:[contents objectAtIndex:i] attributes:@{NSParagraphStyleAttributeName : style}];
         col1.lineBreakMode = NSLineBreakByCharWrapping;
         col1.numberOfLines = 0;
         col1.attributedText = attrText;

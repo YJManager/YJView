@@ -32,12 +32,12 @@
     YJFormView * matrix = [[YJFormView alloc] initWithFrame:CGRectMake(5, 60, kSCREEN_WIDTH - 10, 200) columnRatios:[[NSArray alloc] initWithObjects:@0.2,@0.4,@0.4, nil]];
     
     
-    [matrix addRecord:[[NSArray alloc] initWithObjects:@" ", @"Old Value", @"New value ", nil]];
+    [matrix addRecord:[[NSArray alloc] initWithObjects:@" ", @"Old Value", @"New value ",  @"New value ", nil]];
     [matrix addRecord:[[NSArray alloc] initWithObjects:@"Field1", @"hello", @"This is a really really long string and should wrap to multiple lines.", nil]];
     [matrix addRecord:[[NSArray alloc] initWithObjects:@"Some Date", @"06/24/2013", @"06/30/2013", nil]];
     [matrix addRecord:[[NSArray alloc] initWithObjects:@"Field2", @"some value", @"some new value", nil]];
     [matrix addRecord:[[NSArray alloc] initWithObjects:@"Long Fields", @"The quick brown fox jumps over the little lazy dog.", @"some new value", nil]];
-    [matrix addRecord:[[NSArray alloc] initWithObjects:@"Long Fields", @"The quick brown fox jumps over the little lazy dog.", @"some new value", nil]];
+    [matrix addRecord:[[NSArray alloc] initWithObjects:@"Long Fields", @"The quick brown fox jumps over the little lazy dog.",nil]];
     
     [self.view addSubview:matrix];
     
