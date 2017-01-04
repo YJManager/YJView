@@ -28,4 +28,6 @@
 @property (nonatomic, assign) NSRange highlightedRange; /**< 上次选中的 */
 @property (nonatomic, weak) id<YJTouchLabelDelegate> delegate;
 
+- (void)cancelCurrentTouch;
+
 @end

@@ -11,6 +11,8 @@
 
 @interface YJTouchLabel ()
 
+@property(nonatomic, strong) NSSet* lastTouches;
+
 @end
 
 @implementation YJTouchLabel
@@ -35,22 +37,41 @@
 
 - (CFIndex)characterIndexAtPoint:(CGPoint)point{
     
-    NSMutableAttributedString *optimizedAttributedText = [self.attributedText mutableCopy];
+    ////////
     
-    // 统一换行模式
-    [self.attributedText enumerateAttribute:(NSString *)kCTParagraphStyleAttributeName inRange:NSMakeRange(0, optimizedAttributedText.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
+    NSMutableAttributedString* optimizedAttributedText = [self.attributedText mutableCopy];
+    
+    // use label's font and lineBreakMode properties in case the attributedText does not contain such attributes
+    [self.attributedText enumerateAttributesInRange:NSMakeRange(0, [self.attributedText length]) options:0 usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
         
-        NSMutableParagraphStyle *paragraphStyle = [value mutableCopy];
-        
-        if (paragraphStyle.lineBreakMode == NSLineBreakByTruncatingTail) {
-            paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+        if (!attrs[(NSString*)kCTFontAttributeName]) {
+            
+            [optimizedAttributedText addAttribute:(NSString*)kCTFontAttributeName value:self.font range:NSMakeRange(0, [self.attributedText length])];
         }
         
-        [optimizedAttributedText removeAttribute:(NSString *)kCTParagraphStyleAttributeName range:range];
-        [optimizedAttributedText addAttribute:(NSString *)kCTParagraphStyleAttributeName value:paragraphStyle range:range];
-        
+        if (!attrs[(NSString*)kCTParagraphStyleAttributeName]) {
+            
+            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+            [paragraphStyle setLineBreakMode:self.lineBreakMode];
+            
+            [optimizedAttributedText addAttribute:(NSString*)kCTParagraphStyleAttributeName value:paragraphStyle range:range];
+        }
     }];
     
+    // modify kCTLineBreakByTruncatingTail lineBreakMode to kCTLineBreakByWordWrapping
+    [optimizedAttributedText enumerateAttribute:(NSString*)kCTParagraphStyleAttributeName inRange:NSMakeRange(0, [optimizedAttributedText length]) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
+        
+        NSMutableParagraphStyle* paragraphStyle = [value mutableCopy];
+        
+        if ([paragraphStyle lineBreakMode] == NSLineBreakByTruncatingTail) {
+            [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
+        }
+        
+        [optimizedAttributedText removeAttribute:(NSString*)kCTParagraphStyleAttributeName range:range];
+        [optimizedAttributedText addAttribute:(NSString*)kCTParagraphStyleAttributeName value:paragraphStyle range:range];
+    }];
+    
+    ////////
     
     if (!CGRectContainsPoint(self.bounds, point)) {
         return NSNotFound;
@@ -62,9 +83,12 @@
         return NSNotFound;
     }
     
-    // 求出触摸点和文本显示的坐标点
+    // Offset tap coordinates by textRect origin to make them relative to the origin of frame
     point = CGPointMake(point.x - textRect.origin.x, point.y - textRect.origin.y);
+    // Convert tap coordinates (start at top left) to CT coordinates (start at bottom left)
     point = CGPointMake(point.x, textRect.size.height - point.y);
+    
+    //////
     
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)optimizedAttributedText);
     
@@ -79,7 +103,10 @@
     }
     
     CFArrayRef lines = CTFrameGetLines(frame);
-    NSInteger numberOfLines = self.numberOfLines > 0?MIN(self.numberOfLines, CFArrayGetCount(lines)):CFArrayGetCount(lines);
+    
+    NSInteger numberOfLines = self.numberOfLines > 0 ? MIN(self.numberOfLines, CFArrayGetCount(lines)) : CFArrayGetCount(lines);
+    
+    //NSLog(@"num lines: %d", numberOfLines);
     
     if (numberOfLines == 0) {
         CFRelease(frame);
@@ -144,6 +171,7 @@
 #pragma mark -- Action
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
+    self.lastTouches = touches;
     UITouch *touch = [touches anyObject];
     CFIndex index = [self characterIndexAtPoint:[touch locationInView:self]];
     if (self.delegate && [self.delegate respondsToSelector:@selector(touchLabel:toucheBegan:onCharacterAtIndex:)]) {
@@ -154,6 +182,7 @@
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
+    self.lastTouches = touches;
     UITouch *touch = [touches anyObject];
     CFIndex index = [self characterIndexAtPoint:[touch locationInView:self]];
     if (self.delegate && [self.delegate respondsToSelector:@selector(touchLabel:toucheMoved:onCharacterAtIndex:)]) {
@@ -163,6 +192,11 @@
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    if (!self.lastTouches) {
+        return;
+    }
+    self.lastTouches = nil;
     
     UITouch *touch = [touches anyObject];
     CFIndex index = [self characterIndexAtPoint:[touch locationInView:self]];
@@ -174,12 +208,27 @@
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
+    if (!self.lastTouches) {
+        return;
+    }
+    self.lastTouches = nil;
+    
     UITouch *touch = [touches anyObject];
     CFIndex index = [self characterIndexAtPoint:[touch locationInView:self]];
     if (self.delegate && [self.delegate respondsToSelector:@selector(touchLabel:toucheCancelled:onCharacterAtIndex:)]) {
         [self.delegate touchLabel:self toucheCancelled:touch onCharacterAtIndex:index];
     }
     [super touchesCancelled:touches withEvent:event];
+}
+
+- (void)cancelCurrentTouch {
+    
+    if (self.lastTouches) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(touchLabel:toucheCancelled:onCharacterAtIndex:)]) {
+            [self.delegate touchLabel:self toucheCancelled:[self.lastTouches anyObject] onCharacterAtIndex:NSNotFound];
+            self.lastTouches = nil;
+        }
+    }
 }
 
 
