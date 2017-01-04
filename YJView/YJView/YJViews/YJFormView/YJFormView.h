@@ -19,6 +19,7 @@
 
 @property (nonatomic, weak) id<YJFormViewDatasource> dataSource;
 @property (nonatomic, strong) UIColor *borderLineColor; /**< 线的颜色 */
+@property (nonatomic, assign) CGFloat borderLineWidth; /**< 线的宽度 */
 
 - (instancetype)initWithFrame:(CGRect)frame columnRatios:(NSArray <NSNumber *>*)columnRatios;
 
