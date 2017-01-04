@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSMutableArray *columnWidths; /**< 列宽 */
 @property (nonatomic, assign) NSUInteger rows; /**< 共行数 */
 @property (nonatomic, assign) NSUInteger dy; /**< 纵向起点 */
+@property (nonatomic, strong) NSArray *currentDataSource; /**< 当前数据源 */
 
 @end
 
@@ -24,6 +25,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self _setUpInitWithFrame:frame columnRatios:columnRatios];
+        self.borderLineColor = [UIColor colorWithWhite:0.821 alpha:1.000];
     }
     return self;
 }
@@ -42,34 +44,62 @@
     self.dy = 0;
 }
 
-- (void)addRecord: (NSArray *)records {
-    
-    NSMutableArray *contents = [NSMutableArray arrayWithArray:records];
-    // 容错处理
-    NSInteger distanceCount = self.columnWidths.count - contents.count;
-    
-    if (distanceCount > 0) { // 数据不够
-        for (NSInteger i = 0; i < distanceCount; i++) {
-            [contents addObject:@""];
-        }
-    }else if (distanceCount < 0){ // 数据超了
-        [contents removeObjectsInRange:NSMakeRange(self.columnWidths.count, -distanceCount)];
+- (NSArray *)formDataSource{
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(formViewWithFormDataSource:)]) {
+        return [self.dataSource formViewWithFormDataSource:self];
+    }else{
+        return nil;
     }
+}
+
+- (void)reload{
+    
+    NSArray *formDatasource = [self formDataSource];
+    if ([self.currentDataSource isEqualToArray:formDatasource]) {
+        return;
+    }else{
+        self.currentDataSource = formDatasource;
+        [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    }
+    
+    for (NSArray *records in formDatasource) {
+        
+        if (records.count == 0) continue;
+
+        NSMutableArray *contents = [NSMutableArray arrayWithArray:records];
+        // 容错处理
+        NSInteger distanceCount = self.columnWidths.count - contents.count;
+        
+        if (distanceCount > 0) { // 数据不够
+            for (NSInteger i = 0; i < distanceCount; i++) {
+                [contents addObject:@""];
+            }
+        }else if (distanceCount < 0){ // 数据超了
+            [contents removeObjectsInRange:NSMakeRange(self.columnWidths.count, -distanceCount)];
+        }
+
+        [self reloadFormViewWithRecord:contents];
+    }
+}
+
+- (void)reloadFormViewWithRecord:(NSArray *)records{
     
     uint rowHeight = 30;
     uint dx = 0;
-    NSMutableArray* labels = [[NSMutableArray alloc] init];
-    //CREATE THE ITEMS/COLUMNS OF THE ROW
-    for(uint i = 0; i < contents.count; i++){
-        float colWidth = [[self.columnWidths objectAtIndex:i] floatValue];//colwidth as given at setup
+    NSMutableArray *labels = [[NSMutableArray alloc] init];
+    
+    for(NSInteger i = 0; i < records.count; i++){
+        // 取出列宽
+        float colWidth = [[self.columnWidths objectAtIndex:i] floatValue];
         CGRect rect = CGRectMake(dx, self.dy, colWidth, rowHeight);
-        //ADJUST X FOR BORDER OVERLAPPING BETWEEN COLUMNS
-        if(i>0){
+        
+        // 调整线宽为重叠
+        if(i > 0){
             rect.origin.x -= i;
         }
-        //--------------------------------------------
-        UILabel* col1 = [[UILabel alloc] init];
-        [col1.layer setBorderColor:[[UIColor colorWithWhite:0.821 alpha:1.000] CGColor]];
+        
+        UILabel *col1 = [[UILabel alloc] init];
+        [col1.layer setBorderColor:self.borderLineColor.CGColor];
         [col1.layer setBorderWidth:1.0];
         col1.font = [UIFont fontWithName:@"Helvetica" size:12.0];
         col1.frame = rect;
@@ -84,7 +114,7 @@
             style.alignment = NSTextAlignmentCenter;
             col1.backgroundColor = [UIColor colorWithWhite:0.961 alpha:1.000];
         }
-        NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:[contents objectAtIndex:i] attributes:@{NSParagraphStyleAttributeName : style}];
+        NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:[records objectAtIndex:i] attributes:@{NSParagraphStyleAttributeName : style}];
         col1.lineBreakMode = NSLineBreakByCharWrapping;
         col1.numberOfLines = 0;
         col1.attributedText = attrText;
@@ -117,6 +147,7 @@
     tempRect.size.height = self.dy;
     self.frame = tempRect;
 }
+
 
 #pragma mark - Lazy
 - (NSMutableArray *)columnWidths{

@@ -9,7 +9,9 @@
 #import "YJFormViewController.h"
 #import "YJFormView.h"
 
-@interface YJFormViewController ()
+@interface YJFormViewController () <YJFormViewDatasource>
+
+@property (nonatomic, strong) YJFormView *formView; /**< 原生表格 */
 
 @end
 
@@ -29,22 +31,29 @@
 
 - (void)_setUpYJFormMainView{
     
-    YJFormView * matrix = [[YJFormView alloc] initWithFrame:CGRectMake(5, 60, kSCREEN_WIDTH - 10, 200) columnRatios:[[NSArray alloc] initWithObjects:@0.2,@0.4,@0.4, nil]];
+    [self.view addSubview:self.formView];
     
-    
-    [matrix addRecord:[[NSArray alloc] initWithObjects:@" ", @"Old Value", @"New value ",  @"New value ", nil]];
-    [matrix addRecord:[[NSArray alloc] initWithObjects:@"Field1", @"hello", @"This is a really really long string and should wrap to multiple lines.", nil]];
-    [matrix addRecord:[[NSArray alloc] initWithObjects:@"Some Date", @"06/24/2013", @"06/30/2013", nil]];
-    [matrix addRecord:[[NSArray alloc] initWithObjects:@"Field2", @"some value", @"some new value", nil]];
-    [matrix addRecord:[[NSArray alloc] initWithObjects:@"Long Fields", @"The quick brown fox jumps over the little lazy dog.", @"some new value", nil]];
-    [matrix addRecord:[[NSArray alloc] initWithObjects:@"Long Fields", @"The quick brown fox jumps over the little lazy dog.",nil]];
-    
-    [self.view addSubview:matrix];
-    
+}
+
+- (NSArray *)formViewWithFormDataSource:(YJFormView *)formView{
+    return @[@[@"编号", @"姓名", @"身高"], @[@"01", @"张三", @"175cm"], @[@"02", @"李四", @"180cm"], @[@"03", @"王五", @"165cm"], @[@"04", @"王蛋", @"159cm"], @[@"05", @"李四哈哈哈哈哈哈", @"180c545151515151515m"]];
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.formView reload];
 }
 
 -(void)_loadYJFormDataFormServer{
     
+}
+
+#pragma mark - Lazy
+- (YJFormView *)formView{
+    if (_formView == nil) {
+        _formView = [[YJFormView alloc] initWithFrame:CGRectMake(5, 80, kSCREEN_WIDTH - 10, 200) columnRatios:[[NSArray alloc] initWithObjects:@0.2,@0.4,@0.4, nil]];
+        _formView.dataSource = self;
+        _formView.borderLineColor = [UIColor redColor];
+    }
+    return _formView;
 }
 
 @end

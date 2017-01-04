@@ -8,10 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@class YJFormView;
+@protocol YJFormViewDatasource <NSObject>
+
+- (NSArray *)formViewWithFormDataSource:(YJFormView *)formView;
+
+@end
+
 @interface YJFormView : UIView
 
+@property (nonatomic, weak) id<YJFormViewDatasource> dataSource;
+@property (nonatomic, strong) UIColor *borderLineColor; /**< 线的颜色 */
+
 - (instancetype)initWithFrame:(CGRect)frame columnRatios:(NSArray <NSNumber *>*)columnRatios;
-- (void)addRecord:(NSArray*)record;
+
+- (void)reload;
 
 
 @end
