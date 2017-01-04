@@ -18,6 +18,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        self.highlightedRange = NSMakeRange(NSNotFound, 0);
         self.userInteractionEnabled = YES;
     }
     return self;
@@ -26,6 +27,7 @@
 - (instancetype)initWithCoder:(NSCoder *)coder{
     self = [super initWithCoder:coder];
     if (self) {
+        self.highlightedRange = NSMakeRange(NSNotFound, 0);
         self.userInteractionEnabled = YES;
     }
     return self;

@@ -121,6 +121,7 @@
     if (_touchLabel == nil) {
         _touchLabel = [[YJTouchLabel alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT * 0.5)];
         _touchLabel.delegate = self;
+        _touchLabel.backgroundColor = [UIColor lightGrayColor];
         _touchLabel.text = @"是中国 最专业 最有数据凝聚力的 移动开发 者服务平台 友盟以移动应用 统计分析为产品起点 发展成为提 供从基础设置搭 建-开发-运营服务的 整合服务平台 致力于为移动开发 者提供专业的数据统计分析 开发和运营组件及推广服务 2013年10月推出“一站式“解决方案，服务包含移 动用统计分析以 及细分行的移动 游戏统计分析 社会化分享组件 消息推送 自动更新 用户反馈错误分析等产品";
         _touchLabel.numberOfLines = 0;
     }
