@@ -66,6 +66,12 @@
     }else if (index == 2){
         YJFormViewController *vc = [[YJFormViewController alloc] init];
         pushingController = vc;
+    }else if (index == 3){
+        YJFormViewController *vc = [[YJFormViewController alloc] init];
+        pushingController = vc;
+    }else if (index == 4){
+        YJFormViewController *vc = [[YJFormViewController alloc] init];
+        pushingController = vc;
     }
     
     if (pushingController) {
