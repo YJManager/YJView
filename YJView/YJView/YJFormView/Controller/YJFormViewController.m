@@ -22,7 +22,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self _setUpYJFormNavgationView];
     [self _setUpYJFormMainView];
-    [self _loadYJFormDataFormServer];
 }
 
 - (void)_setUpYJFormNavgationView{
@@ -41,12 +40,6 @@
 
 - (NSArray *)formViewWithFormDataSource:(YJFormView *)formView{
     return @[@[@"编号", @"姓名", @"身高"], @[@"01", @"张三", @"175cm"], @[@"02", @"李四", @"180cm"], @[@"03", @"王五", @"165cm"], @[@"04", @"王蛋", @"159cm"], @[@"05", @"李四哈哈哈哈哈哈", @"180c545151515151515m"]];
-}
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-}
-
--(void)_loadYJFormDataFormServer{
-    
 }
 
 #pragma mark - Lazy
