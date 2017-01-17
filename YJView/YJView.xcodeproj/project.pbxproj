@@ -14,6 +14,8 @@
 		63830BF51E1CF1EF00BB8FED /* YJFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63830BF41E1CF1EF00BB8FED /* YJFormViewController.m */; };
 		63A4B2E91E16535300067379 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A4B2E81E16535300067379 /* MainViewController.m */; };
 		63A4B2F01E16542A00067379 /* TouchLinkLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A4B2EF1E16542A00067379 /* TouchLinkLabelViewController.m */; };
+		63A85A8D1E2E2C110093F731 /* TableViewWaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A85A8C1E2E2C110093F731 /* TableViewWaveViewController.m */; };
+		63A85A941E2E2CB20093F731 /* UITableView+Wave.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A85A931E2E2CB20093F731 /* UITableView+Wave.m */; };
 		63ACD11F1E0D329E001B8A3A /* YJTableViewGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 63ACD11E1E0D329E001B8A3A /* YJTableViewGenerator.m */; };
 		63B54B111E0D029700C94151 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B54B101E0D029700C94151 /* main.m */; };
 		63B54B141E0D029700C94151 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B54B131E0D029700C94151 /* AppDelegate.m */; };
@@ -38,6 +40,10 @@
 		63A4B2EE1E16542A00067379 /* TouchLinkLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchLinkLabelViewController.h; sourceTree = "<group>"; };
 		63A4B2EF1E16542A00067379 /* TouchLinkLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchLinkLabelViewController.m; sourceTree = "<group>"; };
 		63A4B2F11E1655F600067379 /* YJViewPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJViewPrefixHeader.pch; sourceTree = "<group>"; };
+		63A85A8B1E2E2C110093F731 /* TableViewWaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewWaveViewController.h; sourceTree = "<group>"; };
+		63A85A8C1E2E2C110093F731 /* TableViewWaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewWaveViewController.m; sourceTree = "<group>"; };
+		63A85A921E2E2CB20093F731 /* UITableView+Wave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Wave.h"; sourceTree = "<group>"; };
+		63A85A931E2E2CB20093F731 /* UITableView+Wave.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Wave.m"; sourceTree = "<group>"; };
 		63ACD11D1E0D329E001B8A3A /* YJTableViewGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJTableViewGenerator.h; sourceTree = "<group>"; };
 		63ACD11E1E0D329E001B8A3A /* YJTableViewGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJTableViewGenerator.m; sourceTree = "<group>"; };
 		63B54B0C1E0D029700C94151 /* YJView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YJView.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +161,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		63A85A8A1E2E2BF60093F731 /* TableViewWaveLoad */ = {
+			isa = PBXGroup;
+			children = (
+				63A85A8B1E2E2C110093F731 /* TableViewWaveViewController.h */,
+				63A85A8C1E2E2C110093F731 /* TableViewWaveViewController.m */,
+			);
+			path = TableViewWaveLoad;
+			sourceTree = "<group>";
+		};
+		63A85A8E1E2E2C6E0093F731 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				63A85A921E2E2CB20093F731 /* UITableView+Wave.h */,
+				63A85A931E2E2CB20093F731 /* UITableView+Wave.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		63ACD11B1E0D3280001B8A3A /* UITableViewGenerator */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +191,7 @@
 		63ACD11C1E0D3280001B8A3A /* YJViews */ = {
 			isa = PBXGroup;
 			children = (
+				63A85A8A1E2E2BF60093F731 /* TableViewWaveLoad */,
 				63830BEA1E1CF18700BB8FED /* YJFormView */,
 				63830BD81E1CC0D000BB8FED /* YJPlaceholderTextView */,
 				63830BD91E1CC0D000BB8FED /* YJTouchLabel */,
@@ -193,6 +218,7 @@
 		63B54B0E1E0D029700C94151 /* YJView */ = {
 			isa = PBXGroup;
 			children = (
+				63A85A8E1E2E2C6E0093F731 /* Category */,
 				63830BEE1E1CF1C900BB8FED /* YJFormView */,
 				63830BE01E1CC18F00BB8FED /* PlaceholderTextView */,
 				63A4B2EA1E16541400067379 /* TouchAndLinkLabel */,
@@ -298,9 +324,11 @@
 				63830BDC1E1CC0D000BB8FED /* YJTouchLabel.m in Sources */,
 				63B54B141E0D029700C94151 /* AppDelegate.m in Sources */,
 				63A4B2F01E16542A00067379 /* TouchLinkLabelViewController.m in Sources */,
+				63A85A941E2E2CB20093F731 /* UITableView+Wave.m in Sources */,
 				63ACD11F1E0D329E001B8A3A /* YJTableViewGenerator.m in Sources */,
 				63830BF51E1CF1EF00BB8FED /* YJFormViewController.m in Sources */,
 				63830BED1E1CF19F00BB8FED /* YJFormView.m in Sources */,
+				63A85A8D1E2E2C110093F731 /* TableViewWaveViewController.m in Sources */,
 				63B54B111E0D029700C94151 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

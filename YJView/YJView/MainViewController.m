@@ -11,6 +11,7 @@
 #import "TouchLinkLabelViewController.h"
 #import "PlaceholderTextViewController.h"
 #import "YJFormViewController.h"
+#import "TableViewWaveViewController.h"
 
 @interface MainViewController ()
 
@@ -34,7 +35,8 @@
     
     NSArray * dataSource = @[@"可点击和超链接Label",
                              @"带有Placeholder的TextView",
-                             @"原生的表格"
+                             @"原生的表格",
+                             @"逐条动画加载Tableview"
                              ];
     __weak typeof(self) weakSelf = self;
     [[YJTableViewGenerator shareInstance] createTableViewWithDataSource:dataSource rowHeight:44 inController:self didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
@@ -67,7 +69,7 @@
         YJFormViewController *vc = [[YJFormViewController alloc] init];
         pushingController = vc;
     }else if (index == 3){
-        YJFormViewController *vc = [[YJFormViewController alloc] init];
+        TableViewWaveViewController *vc = [[TableViewWaveViewController alloc] init];
         pushingController = vc;
     }else if (index == 4){
         YJFormViewController *vc = [[YJFormViewController alloc] init];
