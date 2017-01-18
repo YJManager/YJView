@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kBOUNCE_DISTANCE  2
+#define kBOUNCE_DISTANCE  10
 
 typedef NS_ENUM(NSInteger,WaveAnimation) {
     LeftToRightWaveAnimation = -1,
