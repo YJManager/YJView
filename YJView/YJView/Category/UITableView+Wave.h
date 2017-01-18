@@ -10,15 +10,16 @@
 
 #define kBOUNCE_DISTANCE  10
 
-typedef NS_ENUM(NSInteger,WaveAnimation) {
-    LeftToRightWaveAnimation = -1,
-    RightToLeftWaveAnimation = 1
+typedef NS_ENUM(NSInteger, WaveAnimationDirection) {
+    WaveAnimationDirectionBottom = 0,
+    WaveAnimationDirectionFromLeft = -1,
+    WaveAnimationDirectionFromRight = 1
 };
 
 
 @interface UITableView (Wave)
 
-- (void)reloadDataAnimateWithWave:(WaveAnimation)animation;
+- (void)reloadDataAnimateWithWave:(WaveAnimationDirection)animation;
 
 
 @end

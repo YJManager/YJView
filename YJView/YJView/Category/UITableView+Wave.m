@@ -10,7 +10,7 @@
 
 @implementation UITableView (Wave)
 
-- (void)reloadDataAnimateWithWave:(WaveAnimation)animation{
+- (void)reloadDataAnimateWithWave:(WaveAnimationDirection)animation{
     
     [self setContentOffset:self.contentOffset animated:NO];
     [UIView animateWithDuration:0.0 animations:^{
@@ -18,12 +18,14 @@
         [self reloadData];
     }completion:^(BOOL finished){
         [self setHidden:NO];
+        
+        // reloadData 加载完毕
         [self visibleRowsBeginAnimation:animation];
     }];
 }
 
 
-- (void)visibleRowsBeginAnimation:(WaveAnimation)animation{
+- (void)visibleRowsBeginAnimation:(WaveAnimationDirection)animation{
     
     NSArray *array = [self indexPathsForVisibleRows];
     for (int i = 0; i < array.count; i++) {
@@ -31,7 +33,7 @@
         UITableViewCell *cell = [self cellForRowAtIndexPath:path];
         cell.hidden = YES;
         NSArray *array = @[path, [NSNumber numberWithInt:animation]];
-        [self performSelector:@selector(animationStart:) withObject:array afterDelay:0.1*(i+1)];
+        [self performSelector:@selector(animationStart:) withObject:array afterDelay:0.1 * (i+1)];
     }
 }
 
@@ -41,6 +43,11 @@
     float i = [((NSNumber*)[array objectAtIndex:1]) floatValue] ;
     UITableViewCell *cell = [self cellForRowAtIndexPath:path];
     CGPoint originPoint = cell.center;
+    
+    // 从底部
+    if (i == 0) {
+        i = 0.5f;
+    }
     cell.center = CGPointMake(cell.frame.size.width * i, originPoint.y);
     [UIView animateWithDuration:0.25
                           delay:0
