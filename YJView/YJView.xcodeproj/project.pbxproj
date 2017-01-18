@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6301F7CF1E2F6C1800E51662 /* YJGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6301F7CE1E2F6C1800E51662 /* YJGridViewController.m */; };
+		6301F7D21E2F6C7D00E51662 /* YJGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6301F7D11E2F6C7D00E51662 /* YJGridView.m */; };
 		63830BDC1E1CC0D000BB8FED /* YJTouchLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 63830BDB1E1CC0D000BB8FED /* YJTouchLabel.m */; };
 		63830BDF1E1CC10500BB8FED /* YJPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 63830BDE1E1CC10500BB8FED /* YJPlaceholderTextView.m */; };
 		63830BE71E1CC1DB00BB8FED /* PlaceholderTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63830BE61E1CC1DB00BB8FED /* PlaceholderTextViewController.m */; };
@@ -25,6 +27,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6301F7CD1E2F6C1800E51662 /* YJGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJGridViewController.h; sourceTree = "<group>"; };
+		6301F7CE1E2F6C1800E51662 /* YJGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGridViewController.m; sourceTree = "<group>"; };
+		6301F7D01E2F6C7D00E51662 /* YJGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJGridView.h; sourceTree = "<group>"; };
+		6301F7D11E2F6C7D00E51662 /* YJGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGridView.m; sourceTree = "<group>"; };
 		63830BDA1E1CC0D000BB8FED /* YJTouchLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJTouchLabel.h; sourceTree = "<group>"; };
 		63830BDB1E1CC0D000BB8FED /* YJTouchLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJTouchLabel.m; sourceTree = "<group>"; };
 		63830BDD1E1CC10500BB8FED /* YJPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJPlaceholderTextView.h; sourceTree = "<group>"; };
@@ -67,6 +73,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6301F7CB1E2F6BB600E51662 /* YJGridViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6301F7CC1E2F6BFA00E51662 /* YJGridViewManager */,
+			);
+			path = YJGridViewController;
+			sourceTree = "<group>";
+		};
+		6301F7CC1E2F6BFA00E51662 /* YJGridViewManager */ = {
+			isa = PBXGroup;
+			children = (
+				6301F7CD1E2F6C1800E51662 /* YJGridViewController.h */,
+				6301F7CE1E2F6C1800E51662 /* YJGridViewController.m */,
+				6301F7D01E2F6C7D00E51662 /* YJGridView.h */,
+				6301F7D11E2F6C7D00E51662 /* YJGridView.m */,
+			);
+			path = YJGridViewManager;
+			sourceTree = "<group>";
+		};
 		63830BD81E1CC0D000BB8FED /* YJPlaceholderTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +216,7 @@
 		63ACD11C1E0D3280001B8A3A /* YJViews */ = {
 			isa = PBXGroup;
 			children = (
+				6301F7CB1E2F6BB600E51662 /* YJGridViewController */,
 				63A85A8A1E2E2BF60093F731 /* TableViewWaveLoad */,
 				63830BEA1E1CF18700BB8FED /* YJFormView */,
 				63830BD81E1CC0D000BB8FED /* YJPlaceholderTextView */,
@@ -321,6 +347,7 @@
 				63A4B2E91E16535300067379 /* MainViewController.m in Sources */,
 				63830BE71E1CC1DB00BB8FED /* PlaceholderTextViewController.m in Sources */,
 				63830BDF1E1CC10500BB8FED /* YJPlaceholderTextView.m in Sources */,
+				6301F7CF1E2F6C1800E51662 /* YJGridViewController.m in Sources */,
 				63830BDC1E1CC0D000BB8FED /* YJTouchLabel.m in Sources */,
 				63B54B141E0D029700C94151 /* AppDelegate.m in Sources */,
 				63A4B2F01E16542A00067379 /* TouchLinkLabelViewController.m in Sources */,
@@ -328,6 +355,7 @@
 				63ACD11F1E0D329E001B8A3A /* YJTableViewGenerator.m in Sources */,
 				63830BF51E1CF1EF00BB8FED /* YJFormViewController.m in Sources */,
 				63830BED1E1CF19F00BB8FED /* YJFormView.m in Sources */,
+				6301F7D21E2F6C7D00E51662 /* YJGridView.m in Sources */,
 				63A85A8D1E2E2C110093F731 /* TableViewWaveViewController.m in Sources */,
 				63B54B111E0D029700C94151 /* main.m in Sources */,
 			);

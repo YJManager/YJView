@@ -36,7 +36,8 @@
     NSArray * dataSource = @[@"可点击和超链接Label",
                              @"带有Placeholder的TextView",
                              @"原生的表格",
-                             @"逐条动画加载Tableview"
+                             @"逐条动画加载Tableview",
+                             @"YJGrid格子横向纵向自由滑动"
                              ];
     __weak typeof(self) weakSelf = self;
     [[YJTableViewGenerator shareInstance] createTableViewWithDataSource:dataSource rowHeight:44 inController:self didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
