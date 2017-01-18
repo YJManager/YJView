@@ -55,10 +55,41 @@
 }
 
 
+- (void)reloadData{
+    //fetch total grid size
+    // 获取格子的大小
+    self.rows = [self.dataSource numberOfRowsInGridView:self];
+    self.columns = [self.dataSource numberOfColumnsInGridView:self];
+    
+    // 获取可见区域大小
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfVisibleRowsInGridView:)]) {
+        self.visibleRows = [self.dataSource numberOfVisibleRowsInGridView:self];
+    }else{
+        self.visibleRows = self.rows;
+    }
+    
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfVisibleColumnsInGridView:)]) {
+        self.visibleColumns = [self.dataSource numberOfVisibleColumnsInGridView:self];
+    }else{
+        self.visibleColumns = self.columns;
+    }
+    
+    [self initCells];
+}
+
+-(void)initCells{}
+
+
 #pragma mark - UIPanGestureRecognizer
 -(void)panGestureDetected:(UIPanGestureRecognizer *)gestureRecognizer{
     
     
 }
+
+#pragma mark - SettingSupport
+static inline YJPosition YJPositionMake(NSInteger row, NSInteger column) {
+    return (YJPosition) {row, column};
+}
+
 
 @end

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class YJGridView;
+
 typedef struct{
     NSInteger row;
     NSInteger column;
@@ -15,9 +17,33 @@ typedef struct{
 
 static inline YJPosition YJPositionMake(NSInteger row, NSInteger column);
 
+/** 数据源方法 */
+@protocol YJGridViewDataSource <NSObject>
+
+@required
+-(NSInteger)numberOfRowsInGridView:(YJGridView *)gridView;
+-(NSInteger)numberOfColumnsInGridView:(YJGridView *)gridView;
+@optional
+-(NSInteger)numberOfVisibleRowsInGridView:(YJGridView *)gridView;
+-(NSInteger)numberOfVisibleColumnsInGridView:(YJGridView *)gridView;
+
+@end
+
+/** 数据源方法 */
+@protocol YJGridViewDelegate <NSObject>
+
+
+@end
+
 @interface YJGridView : UIView
+
+@property (nonatomic, weak) id<YJGridViewDataSource> dataSource;
+@property (nonatomic, weak) id<YJGridViewDelegate> delegate;
 
 /** 恢复位置 */
 - (YJPosition)normalizePosition:(YJPosition)position;
+
+/** 刷新数据 */
+- (void)reloadData;
 
 @end
