@@ -70,7 +70,7 @@
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.tableFooterView = [UIView new];
-        [_tableView reloadDataAnimateWithWave:WaveAnimationDirectionBottom];
+        [_tableView reloadDataAnimateWithWave:WaveAnimationDirectionFromRight speed:0.1 bounceDistance:0.0];
     }
     return _tableView;
 }

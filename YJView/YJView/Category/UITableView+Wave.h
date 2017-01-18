@@ -19,7 +19,12 @@ typedef NS_ENUM(NSInteger, WaveAnimationDirection) {
 
 @interface UITableView (Wave)
 
-- (void)reloadDataAnimateWithWave:(WaveAnimationDirection)animation;
+/** 逐条动画加载可视tableview
+    animation 方向
+    speed加载速度
+    bounceDistance左右晃动的程度
+ */
+- (void)reloadDataAnimateWithWave:(WaveAnimationDirection)animation speed:(CGFloat)speed bounceDistance:(CGFloat)bounceDistance;
 
 
 @end
