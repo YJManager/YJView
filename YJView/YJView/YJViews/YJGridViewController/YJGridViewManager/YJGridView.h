@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YJGridViewCell.h"
 
 @class YJGridView;
 
@@ -23,6 +24,7 @@ static inline YJPosition YJPositionMake(NSInteger row, NSInteger column);
 @required
 -(NSInteger)numberOfRowsInGridView:(YJGridView *)gridView;
 -(NSInteger)numberOfColumnsInGridView:(YJGridView *)gridView;
+-(YJGridViewCell *)gridView:(YJGridView *)gridView cellAtPosition:(YJPosition)position;
 @optional
 -(NSInteger)numberOfVisibleRowsInGridView:(YJGridView *)gridView;
 -(NSInteger)numberOfVisibleColumnsInGridView:(YJGridView *)gridView;
@@ -31,6 +33,8 @@ static inline YJPosition YJPositionMake(NSInteger row, NSInteger column);
 
 /** 数据源方法 */
 @protocol YJGridViewDelegate <NSObject>
+
+
 
 
 @end

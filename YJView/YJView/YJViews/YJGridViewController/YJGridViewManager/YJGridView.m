@@ -7,6 +7,9 @@
 //
 
 #import "YJGridView.h"
+#import "YJGridViewCell.h"
+
+static const NSInteger outerOffset = 1;
 
 @interface YJGridView (){
 
@@ -77,7 +80,45 @@
     [self initCells];
 }
 
--(void)initCells{}
+-(void)initCells{
+    
+    // 移除所有子视图
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    CGRect myFrame = self.bounds;
+    
+    // 上下
+    for(int row = -outerOffset; row < self.visibleRows + outerOffset; row++){
+        // 左右
+        for(int column = -outerOffset; column < self.visibleColumns + outerOffset; column++){
+            
+            // 确定当前cell的位置
+            YJPosition cellPosition = YJPositionMake(row, column);
+            YJGridViewCell *cell = [self.dataSource gridView:self cellAtPosition:cellPosition];
+            cell.tag = [self _tagForPosition:cellPosition];
+            
+            //create the frame based on the current position, the view's bounds and the grid's size
+            CGRect cellFrame;
+            cellFrame.size.width = myFrame.size.width / self.visibleColumns;
+            cellFrame.size.height = myFrame.size.height / self.visibleRows;
+            cellFrame.origin.x = column * cellFrame.size.width;
+            cellFrame.origin.y = row * cellFrame.size.height;
+            cell.frame = cellFrame;
+            //add the cell to the grid view
+            [self addSubview:cell];
+            
+            //if the cell is on screen bring it to the front
+            if(row >= 0 && row < self.visibleRows && column >= 0 && column < self.visibleColumns){
+                [self bringSubviewToFront:cell];
+            }
+            //if the cell is off screen send it to the bck
+            else
+            {
+                [self sendSubviewToBack:cell];
+            }
+        }
+    }
+}
 
 
 #pragma mark - UIPanGestureRecognizer
@@ -89,6 +130,16 @@
 #pragma mark - SettingSupport
 static inline YJPosition YJPositionMake(NSInteger row, NSInteger column) {
     return (YJPosition) {row, column};
+}
+
+/** 根据位置生成tag */
+- (NSInteger)_tagForPosition:(YJPosition)position{
+    
+    NSInteger tag = position.row * self.columns + position.column;
+    if(tag == 0){
+        tag = INT_MAX;
+    }
+    return tag;
 }
 
 
