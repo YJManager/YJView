@@ -26,6 +26,7 @@ static inline YJPosition YJPositionMake(NSInteger row, NSInteger column);
 -(NSInteger)numberOfColumnsInGridView:(YJGridView *)gridView;
 -(YJGridViewCell *)gridView:(YJGridView *)gridView cellAtPosition:(YJPosition)position;
 @optional
+-(BOOL)gridView:(YJGridView *)gridView shouldScrollCell:(YJGridViewCell *)cell atPosition:(YJPosition)position;
 -(NSInteger)numberOfVisibleRowsInGridView:(YJGridView *)gridView;
 -(NSInteger)numberOfVisibleColumnsInGridView:(YJGridView *)gridView;
 
@@ -34,8 +35,9 @@ static inline YJPosition YJPositionMake(NSInteger row, NSInteger column);
 /** 数据源方法 */
 @protocol YJGridViewDelegate <NSObject>
 
-
-
+@optional
+-(void)gridView:(YJGridView *)gridView willMoveCell:(YJGridViewCell *)cell fromPosition:(YJPosition)fromPosition toPosition:(YJPosition)toPosition;
+-(void)gridView:(YJGridView *)gridView didMoveCell:(YJGridViewCell *)cell fromPosition:(YJPosition)fromPosition toPosition:(YJPosition)toPosition;
 
 @end
 

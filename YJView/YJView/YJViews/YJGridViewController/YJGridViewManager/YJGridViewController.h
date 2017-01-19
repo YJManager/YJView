@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YJGridView.h"
 
 @interface YJGridViewController : UIViewController
+
+@property (nonatomic, retain) NSMutableArray *cells;
 
 @end
