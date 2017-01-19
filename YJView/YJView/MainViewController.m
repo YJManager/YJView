@@ -12,6 +12,7 @@
 #import "PlaceholderTextViewController.h"
 #import "YJFormViewController.h"
 #import "TableViewWaveViewController.h"
+#import "GridViewController.h"
 
 @interface MainViewController ()
 
@@ -73,8 +74,10 @@
         TableViewWaveViewController *vc = [[TableViewWaveViewController alloc] init];
         pushingController = vc;
     }else if (index == 4){
-        YJFormViewController *vc = [[YJFormViewController alloc] init];
+        GridViewController *vc = [[GridViewController alloc] init];
         pushingController = vc;
+//        [self presentViewController:pushingController animated:YES completion:nil];
+//        return;
     }
     
     if (pushingController) {
