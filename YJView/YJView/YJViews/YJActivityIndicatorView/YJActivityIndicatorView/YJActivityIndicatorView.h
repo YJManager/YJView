@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, YJActivityIndicatorDirection) {
 @property (nonatomic, assign) BOOL hidesWhenStopped;                                    /**< 停止隐藏 */
 @property (nonatomic, assign) BOOL isAnimating;                                         /**< 是否正在动画 */
 
-- (id)initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style;
+- (instancetype)initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style;
 
 - (void)startAnimating;
 - (void)stopAnimating;

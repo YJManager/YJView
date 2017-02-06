@@ -23,33 +23,27 @@
     [self _setPropertiesForStyle:UIActivityIndicatorViewStyleWhite];
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self) {
         [self _setPropertiesForStyle:UIActivityIndicatorViewStyleWhite];
     }
     return self;
 }
 
-- (id)initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style;
-{
+- (instancetype)initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style;{
     self = [self initWithFrame:CGRectZero];
-    if (self)
-    {
+    if (self){
         [self _setPropertiesForStyle:style];
     }
     return self;
 }
 
-- (void)setActivityIndicatorViewStyle:(UIActivityIndicatorViewStyle)activityIndicatorViewStyle
-{
+- (void)setActivityIndicatorViewStyle:(UIActivityIndicatorViewStyle)activityIndicatorViewStyle{
     [self _setPropertiesForStyle:activityIndicatorViewStyle];
 }
 
-- (void)_setPropertiesForStyle:(UIActivityIndicatorViewStyle)style
-{
+- (void)_setPropertiesForStyle:(UIActivityIndicatorViewStyle)style{
     self.backgroundColor = [UIColor clearColor];
     self.direction = YJActivityIndicatorDirectionClockwise;
     self.roundedCoreners = UIRectCornerAllCorners;
