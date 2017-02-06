@@ -38,7 +38,8 @@
                              @"带有Placeholder的TextView",
                              @"原生的表格",
                              @"逐条动画加载Tableview",
-                             @"YJGrid格子横向纵向自由滑动"
+                             @"YJGrid格子横向纵向自由滑动",
+                             @"各种活动指示圈圈"
                              ];
     __weak typeof(self) weakSelf = self;
     [[YJTableViewGenerator shareInstance] createTableViewWithDataSource:dataSource rowHeight:44 inController:self didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {

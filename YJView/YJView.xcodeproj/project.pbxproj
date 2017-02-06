@@ -10,6 +10,7 @@
 		6301F7CF1E2F6C1800E51662 /* YJGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6301F7CE1E2F6C1800E51662 /* YJGridViewController.m */; };
 		6301F7D21E2F6C7D00E51662 /* YJGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6301F7D11E2F6C7D00E51662 /* YJGridView.m */; };
 		6301F7D51E2F7F0100E51662 /* YJGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6301F7D41E2F7F0100E51662 /* YJGridViewCell.m */; };
+		636BA6301E487C7100C4254F /* YJActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 636BA62F1E487C7100C4254F /* YJActivityIndicatorView.m */; };
 		637CB05A1E306E730080FF4A /* GridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 637CB0591E306E730080FF4A /* GridViewController.m */; };
 		637CB0891E306F250080FF4A /* 0-0.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 637CB05D1E306F250080FF4A /* 0-0.jpeg */; };
 		637CB08A1E306F250080FF4A /* 0-1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 637CB05E1E306F250080FF4A /* 0-1.jpeg */; };
@@ -79,6 +80,8 @@
 		6301F7D11E2F6C7D00E51662 /* YJGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGridView.m; sourceTree = "<group>"; };
 		6301F7D31E2F7F0100E51662 /* YJGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJGridViewCell.h; sourceTree = "<group>"; };
 		6301F7D41E2F7F0100E51662 /* YJGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJGridViewCell.m; sourceTree = "<group>"; };
+		636BA62E1E487C7100C4254F /* YJActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YJActivityIndicatorView.h; sourceTree = "<group>"; };
+		636BA62F1E487C7100C4254F /* YJActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YJActivityIndicatorView.m; sourceTree = "<group>"; };
 		637CB0581E306E730080FF4A /* GridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewController.h; sourceTree = "<group>"; };
 		637CB0591E306E730080FF4A /* GridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewController.m; sourceTree = "<group>"; };
 		637CB05D1E306F250080FF4A /* 0-0.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "0-0.jpeg"; sourceTree = "<group>"; };
@@ -189,6 +192,23 @@
 				6301F7D41E2F7F0100E51662 /* YJGridViewCell.m */,
 			);
 			path = YJGridViewManager;
+			sourceTree = "<group>";
+		};
+		636BA62C1E487C6100C4254F /* YJActivityIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				636BA62D1E487C6100C4254F /* YJActivityIndicatorView */,
+			);
+			path = YJActivityIndicatorView;
+			sourceTree = "<group>";
+		};
+		636BA62D1E487C6100C4254F /* YJActivityIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				636BA62E1E487C7100C4254F /* YJActivityIndicatorView.h */,
+				636BA62F1E487C7100C4254F /* YJActivityIndicatorView.m */,
+			);
+			path = YJActivityIndicatorView;
 			sourceTree = "<group>";
 		};
 		637CB05B1E306F250080FF4A /* Resoureces */ = {
@@ -374,6 +394,7 @@
 		63ACD11C1E0D3280001B8A3A /* YJViews */ = {
 			isa = PBXGroup;
 			children = (
+				636BA62C1E487C6100C4254F /* YJActivityIndicatorView */,
 				6301F7CB1E2F6BB600E51662 /* YJGridViewController */,
 				63A85A8A1E2E2BF60093F731 /* TableViewWaveLoad */,
 				63830BEA1E1CF18700BB8FED /* YJFormView */,
@@ -558,6 +579,7 @@
 				63A85A941E2E2CB20093F731 /* UITableView+Wave.m in Sources */,
 				63ACD11F1E0D329E001B8A3A /* YJTableViewGenerator.m in Sources */,
 				63830BF51E1CF1EF00BB8FED /* YJFormViewController.m in Sources */,
+				636BA6301E487C7100C4254F /* YJActivityIndicatorView.m in Sources */,
 				63830BED1E1CF19F00BB8FED /* YJFormView.m in Sources */,
 				6301F7D21E2F6C7D00E51662 /* YJGridView.m in Sources */,
 				63A85A8D1E2E2C110093F731 /* TableViewWaveViewController.m in Sources */,
