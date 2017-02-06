@@ -13,6 +13,7 @@
 #import "YJFormViewController.h"
 #import "TableViewWaveViewController.h"
 #import "GridViewController.h"
+#import "ActivityIndicatorViewController.h"
 
 @interface MainViewController ()
 
@@ -79,6 +80,9 @@
         pushingController = vc;
 //        [self presentViewController:pushingController animated:YES completion:nil];
 //        return;
+    }else if (index == 5){
+        ActivityIndicatorViewController *vc = [[ActivityIndicatorViewController alloc] init];
+        pushingController = vc;
     }
     
     if (pushingController) {
