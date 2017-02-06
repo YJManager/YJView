@@ -26,6 +26,14 @@ typedef NS_ENUM(NSInteger, YJActivityIndicatorDirection) {
 @property (nonatomic, assign) YJActivityIndicatorDirection direction;                   /**< 旋转方向 */
 @property (nonatomic, assign) UIActivityIndicatorViewStyle activityIndicatorViewStyle;  /**< 显示类型 */
 @property (nonatomic, assign) BOOL hidesWhenStopped;                                    /**< 停止隐藏 */
+@property (nonatomic, assign) BOOL isAnimating;                                         /**< 是否正在动画 */
 
+- (id)initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyle)style;
+
+- (void)startAnimating;
+- (void)stopAnimating;
+- (BOOL)isAnimating;
+
+- (CGPathRef)finPathWithRect:(CGRect)rect;
 
 @end
