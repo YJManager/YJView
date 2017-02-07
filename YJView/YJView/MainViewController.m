@@ -14,6 +14,7 @@
 #import "TableViewWaveViewController.h"
 #import "GridViewController.h"
 #import "ActivityIndicatorViewController.h"
+#import "UICircularSliderViewController.h"
 
 @interface MainViewController ()
 
@@ -40,7 +41,8 @@
                              @"原生的表格",
                              @"逐条动画加载Tableview",
                              @"YJGrid格子横向纵向自由滑动",
-                             @"各种活动指示圈圈"
+                             @"各种活动指示菊花圈圈",
+                             @"圆圈进度条"
                              ];
     __weak typeof(self) weakSelf = self;
     [[YJTableViewGenerator shareInstance] createTableViewWithDataSource:dataSource rowHeight:44 inController:self didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
@@ -82,6 +84,9 @@
 //        return;
     }else if (index == 5){
         ActivityIndicatorViewController *vc = [[ActivityIndicatorViewController alloc] init];
+        pushingController = vc;
+    }else if (index == 6){
+        UICircularSliderViewController *vc = [[UICircularSliderViewController alloc] initWithNibName:@"UICircularSliderViewController" bundle:nil];
         pushingController = vc;
     }
     
