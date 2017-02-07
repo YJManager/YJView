@@ -8,16 +8,18 @@
 
 #import "YJActivityIndicatorView.h"
 
-@interface YJActivityIndicatorView (){
-    NSTimer     *_timer;
-    CGFloat     _anglePerStep;
-    CGFloat     _currStep;
-}
+@interface YJActivityIndicatorView ()
+
+@property (nonatomic, strong) NSTimer *timer;            /**< 定时器 */
+@property (nonatomic, assign) CGFloat anglePerStep;      /**< 单角度 */
+@property (nonatomic, assign) CGFloat currentStep;      /**< 当前的位置 */
+@property (nonatomic, assign) BOOL currIsAnimating;     /**< 是否正在动画 */
 
 @end
 
 @implementation YJActivityIndicatorView
 
+#pragma mark - init
 - (void)awakeFromNib{
     [super awakeFromNib];
     [self _setPropertiesForStyle:UIActivityIndicatorViewStyleWhite];
@@ -44,6 +46,7 @@
 }
 
 - (void)_setPropertiesForStyle:(UIActivityIndicatorViewStyle)style{
+    
     self.backgroundColor = [UIColor clearColor];
     self.direction = YJActivityIndicatorDirectionClockwise;
     self.roundedCoreners = UIRectCornerAllCorners;
@@ -52,139 +55,115 @@
     self.steps = 12;
     
     switch (style) {
-        case UIActivityIndicatorViewStyleGray:
-        {
+        case UIActivityIndicatorViewStyleGray:{
             self.color = [UIColor darkGrayColor];
             self.finSize = CGSizeMake(2, 5);
             self.indicatorRadius = 5;
-            
             break;
         }
-            
-        case UIActivityIndicatorViewStyleWhite:
-        {
+        case UIActivityIndicatorViewStyleWhite:{
             self.color = [UIColor whiteColor];
             self.finSize = CGSizeMake(2, 5);
             self.indicatorRadius = 5;
-            
             break;
         }
-            
-        case UIActivityIndicatorViewStyleWhiteLarge:
-        {
+        case UIActivityIndicatorViewStyleWhiteLarge:{
             self.color = [UIColor whiteColor];
             self.cornerRadii = CGSizeMake(2, 2);
             self.finSize = CGSizeMake(3, 9);
             self.indicatorRadius = 8.5;
-            
             break;
         }
-            
         default:
             [NSException raise:NSInvalidArgumentException format:@"style invalid"];
             break;
     }
     
-    _isAnimating = NO;
-    if (_hidesWhenStopped)
+    self.currIsAnimating = NO;
+    if (self.hidesWhenStopped)
         self.hidden = YES;
 }
 
 #pragma mark - UIActivityIndicator
-
-- (void)startAnimating
-{
-    _currStep = 0;
-    _timer = [NSTimer scheduledTimerWithTimeInterval:_stepDuration target:self selector:@selector(_repeatAnimation:) userInfo:nil repeats:YES];
-    _isAnimating = YES;
+- (void)startAnimating{
+    self.currentStep = 0;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.stepDuration target:self selector:@selector(_repeatAnimation:) userInfo:nil repeats:YES];
+    self.currIsAnimating = YES;
     
-    if (_hidesWhenStopped)
+    if (self.hidesWhenStopped)
         self.hidden = NO;
 }
 
-- (void)stopAnimating
-{
-    if (_timer)
-    {
-        [_timer invalidate];
-        _timer = nil;
-    }
+- (void)_repeatAnimation:(NSTimer *)timer{
     
-    _isAnimating = NO;
-    if (_hidesWhenStopped)
-        self.hidden = YES;
-}
-
-- (BOOL)isAnimating
-{
-    return _isAnimating;
-}
-
-#pragma mark - HZActivityIndicator Drawing.
-
-- (void)setIndicatorRadius:(NSUInteger)indicatorRadius
-{
-    _indicatorRadius = indicatorRadius;
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y,
-                            _indicatorRadius*2 + _finSize.height*2,
-                            _indicatorRadius*2 + _finSize.height*2);
+    self.currentStep++;
     [self setNeedsDisplay];
 }
 
-- (void)setSteps:(NSUInteger)steps
-{
+- (void)stopAnimating{
+    if (self.timer){
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+    
+    self.currIsAnimating = NO;
+    if (self.hidesWhenStopped)
+        self.hidden = YES;
+}
+
+- (BOOL)isAnimating{
+    return self.currIsAnimating;
+}
+
+#pragma mark - YJActivityIndicator Drawing
+- (void)setIndicatorRadius:(NSUInteger)indicatorRadius{
+    
+    _indicatorRadius = indicatorRadius;
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _indicatorRadius * 2 + _finSize.height * 2, _indicatorRadius * 2 + _finSize.height * 2);
+    [self setNeedsDisplay];
+}
+
+- (void)setSteps:(NSUInteger)steps{
     _anglePerStep = (360/steps) * M_PI / 180;
     _steps = steps;
     [self setNeedsDisplay];
 }
 
-- (void)setFinSize:(CGSize)finSize
-{
+- (void)setFinSize:(CGSize)finSize{
     _finSize = finSize;
     [self setNeedsDisplay];
 }
 
-- (UIColor*)_colorForStep:(NSUInteger)stepIndex
-{
+/** 根据进度返回不同颜色 */
+- (UIColor *)_colorForStep:(NSUInteger)stepIndex{
     CGFloat alpha = 1.0 - (stepIndex % _steps) * (1.0 / _steps);
-    
     return [UIColor colorWithCGColor:CGColorCreateCopyWithAlpha(_color.CGColor, alpha)];
 }
 
-- (void)_repeatAnimation:(NSTimer*)timer
-{
-    _currStep++;
-    [self setNeedsDisplay];
-}
-
-- (CGPathRef)finPathWithRect:(CGRect)rect
-{
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:rect
-                                                     byRoundingCorners:_roundedCoreners
-                                                           cornerRadii:_cornerRadii];
+- (CGPathRef)finPathWithRect:(CGRect)rect{
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:_roundedCoreners cornerRadii:_cornerRadii];
     CGPathRef path = CGPathCreateCopy([bezierPath CGPath]);
     return path;
 }
 
 - (void)drawRect:(CGRect)rect{
+    
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGRect finRect = CGRectMake(self.bounds.size.width/2 - _finSize.width/2, 0,
-                                _finSize.width, _finSize.height);
+    CGRect finRect = CGRectMake(self.bounds.size.width * 0.5 - _finSize.width * 0.5, 0, _finSize.width, _finSize.height);
     CGPathRef bezierPath = [self finPathWithRect:finRect];
     
-    for (int i = 0; i < _steps; i++)
-    {
-        [[self _colorForStep:_currStep+i*_direction] set];
+    for (int i = 0; i < self.steps; i++){
+        [[self _colorForStep:self.currentStep + i * _direction] set];
         
         CGContextBeginPath(context);
         CGContextAddPath(context, bezierPath);
         CGContextClosePath(context);
         CGContextFillPath(context);
         
-        CGContextTranslateCTM(context, self.bounds.size.width / 2, self.bounds.size.height / 2);
-        CGContextRotateCTM(context, _anglePerStep);
-        CGContextTranslateCTM(context, -(self.bounds.size.width / 2), -(self.bounds.size.height / 2));
+        CGContextTranslateCTM(context, self.bounds.size.width * 0.5, self.bounds.size.height * 0.5);
+        CGContextRotateCTM(context, self.anglePerStep);
+        CGContextTranslateCTM(context, -(self.bounds.size.width * 0.5), -(self.bounds.size.height * 0.5));
     }
 }
 
