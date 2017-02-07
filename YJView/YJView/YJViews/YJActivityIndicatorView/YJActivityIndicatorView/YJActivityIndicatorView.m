@@ -87,6 +87,8 @@
 #pragma mark - UIActivityIndicator
 - (void)startAnimating{
     self.currentStep = 0;
+    /** 先执行一次 */
+    [self _repeatAnimation:nil];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:self.stepDuration target:self selector:@selector(_repeatAnimation:) userInfo:nil repeats:YES];
     self.currIsAnimating = YES;
     

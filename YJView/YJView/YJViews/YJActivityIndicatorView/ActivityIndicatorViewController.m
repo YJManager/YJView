@@ -28,10 +28,10 @@
     YJActivityIndicatorView *activityIndicator = [[YJActivityIndicatorView alloc] initWithFrame:CGRectMake(50, 50 + 64, 0, 0)];
     activityIndicator.backgroundColor = self.view.backgroundColor;
     activityIndicator.opaque = YES;
-    activityIndicator.steps = 6;
+    activityIndicator.steps = 30;
     activityIndicator.finSize = CGSizeMake(3, 15);
     activityIndicator.indicatorRadius = 20;
-    activityIndicator.stepDuration = 0.5;
+    activityIndicator.stepDuration = 0.2;
     activityIndicator.color = [UIColor redColor];
     activityIndicator.cornerRadii = CGSizeMake(0, 0);
     [activityIndicator startAnimating];
