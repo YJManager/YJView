@@ -25,7 +25,7 @@
 
 - (void)_setUpActivityIndicatorMainView{
     
-    YJActivityIndicatorView *activityIndicator = [[YJActivityIndicatorView alloc] initWithFrame:CGRectMake(50, 50, 0, 0)];
+    YJActivityIndicatorView *activityIndicator = [[YJActivityIndicatorView alloc] initWithFrame:CGRectMake(50, 50 + 64, 0, 0)];
     activityIndicator.backgroundColor = self.view.backgroundColor;
     activityIndicator.opaque = YES;
     activityIndicator.steps = 6;
@@ -37,7 +37,7 @@
     [activityIndicator startAnimating];
     [self.view addSubview:activityIndicator];
     
-    activityIndicator = [[YJActivityIndicatorSubExample alloc] initWithFrame:CGRectMake(150, 50, 0, 0)];
+    activityIndicator = [[YJActivityIndicatorSubExample alloc] initWithFrame:CGRectMake(150, 50 + 64, 0, 0)];
     activityIndicator.backgroundColor = self.view.backgroundColor;
     activityIndicator.opaque = YES;
     activityIndicator.steps = 8;
@@ -51,7 +51,7 @@
     [activityIndicator startAnimating];
     [self.view addSubview:activityIndicator];
     
-    activityIndicator = [[YJActivityIndicatorView alloc] initWithFrame:CGRectMake(50, 150, 0, 0)];
+    activityIndicator = [[YJActivityIndicatorView alloc] initWithFrame:CGRectMake(50, 150 + 64, 0, 0)];
     activityIndicator.backgroundColor = self.view.backgroundColor;
     activityIndicator.opaque = YES;
     activityIndicator.steps = 16;
