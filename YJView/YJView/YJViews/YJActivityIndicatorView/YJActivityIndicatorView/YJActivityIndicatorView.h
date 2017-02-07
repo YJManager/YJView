@@ -10,8 +10,8 @@
 
 /** 旋转方向 */
 typedef NS_ENUM(NSInteger, YJActivityIndicatorDirection) {
-    YJActivityIndicatorDirectionClockwise = 0,
-    YJActivityIndicatorDirectionCounterClockwise
+    YJActivityIndicatorDirectionClockwise = -1,
+    YJActivityIndicatorDirectionCounterClockwise = 1
 };
 
 @interface YJActivityIndicatorView : UIView

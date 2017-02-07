@@ -59,7 +59,7 @@
     activityIndicator.indicatorRadius = 20;
     activityIndicator.stepDuration = 0.100;
     activityIndicator.color = [UIColor colorWithRed:0.0 green:34.0/255.0 blue:85.0/255.0 alpha:1.000];
-    activityIndicator.roundedCoreners = UIRectCornerTopRight;
+    activityIndicator.roundedCoreners = UIRectCornerAllCorners;
     activityIndicator.cornerRadii = CGSizeMake(10, 10);
     [activityIndicator startAnimating];
     [self.view addSubview:activityIndicator];

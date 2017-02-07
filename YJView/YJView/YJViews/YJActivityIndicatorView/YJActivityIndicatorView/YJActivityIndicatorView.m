@@ -124,7 +124,7 @@
 }
 
 - (void)setSteps:(NSUInteger)steps{
-    _anglePerStep = (360/steps) * M_PI / 180;
+    self.anglePerStep = (360/steps) * M_PI / 180;
     _steps = steps;
     [self setNeedsDisplay];
 }
