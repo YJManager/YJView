@@ -29,7 +29,7 @@
     activityIndicator.backgroundColor = self.view.backgroundColor;
     activityIndicator.opaque = YES;
     activityIndicator.steps = 6;
-    activityIndicator.finSize = CGSizeMake(17, 10);
+    activityIndicator.finSize = CGSizeMake(3, 15);
     activityIndicator.indicatorRadius = 20;
     activityIndicator.stepDuration = 0.5;
     activityIndicator.color = [UIColor redColor];
@@ -55,10 +55,10 @@
     activityIndicator.backgroundColor = self.view.backgroundColor;
     activityIndicator.opaque = YES;
     activityIndicator.steps = 16;
-    activityIndicator.finSize = CGSizeMake(8, 40);
+    activityIndicator.finSize = CGSizeMake(2, 40);
     activityIndicator.indicatorRadius = 20;
     activityIndicator.stepDuration = 0.100;
-    activityIndicator.color = [UIColor colorWithRed:0.0 green:34.0/255.0 blue:85.0/255.0 alpha:1.000];
+    activityIndicator.color = [UIColor greenColor];
     activityIndicator.roundedCoreners = UIRectCornerAllCorners;
     activityIndicator.cornerRadii = CGSizeMake(10, 10);
     [activityIndicator startAnimating];
