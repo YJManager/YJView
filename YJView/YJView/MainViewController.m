@@ -45,7 +45,8 @@
                              @"圆圈进度条"
                              ];
     __weak typeof(self) weakSelf = self;
-    [[YJTableViewGenerator shareInstance] createTableViewWithDataSource:dataSource rowHeight:44 inController:self didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
+    
+    [[YJTableViewGenerator shareInstance] createTableViewWithDataSource:dataSource cellClass:[self class] rowHeight:44 inController:self didSelectRowBlock:^(UITableView *tableView, NSIndexPath *indexPath) {
         [weakSelf tableView:tableView didSelectRow:indexPath];
     } didScrollBlock:^(UIScrollView *tableView, CGPoint contentOffset) {
         [weakSelf scrollView:tableView contentOffset:contentOffset];

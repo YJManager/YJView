@@ -2,7 +2,7 @@
 //  YJTableViewGenerator.h
 //  YJView
 //
-//  Created by YJHou on 2016/12/23.
+//  Created by YJHou on 2016/2/23.
 //  Copyright © 2016年 YJHou. All rights reserved.
 //
 
@@ -17,6 +17,7 @@ typedef void(^didScrollHandleBlock)(UIScrollView *tableView, CGPoint contentOffs
 
 /** 创建tableView */
 - (UITableView *)createTableViewWithDataSource:(NSArray *)dataSource
+                                     cellClass:(Class)cellClass
                                      rowHeight:(CGFloat)rowHeight
                                   inController:(UIViewController *)controller
                              didSelectRowBlock:(didSelectRowHandleBlock)didSelectRowBlock

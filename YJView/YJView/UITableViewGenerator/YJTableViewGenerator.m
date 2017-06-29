@@ -2,7 +2,7 @@
 //  YJTableViewGenerator.m
 //  YJView
 //
-//  Created by YJHou on 2016/12/23.
+//  Created by YJHou on 2016/2/23.
 //  Copyright © 2016年 YJHou. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 @interface YJTableViewGenerator () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *dataSource; /**< 数据源 */
+@property (nonatomic, strong) Class cellCalss; /**< cell类 */
 @property (nonatomic, copy) didSelectRowHandleBlock didselectRowBlock; /**< 点击row */
 @property (nonatomic, copy) didScrollHandleBlock didScrollBlock; /**< 滚动block */
 
@@ -28,12 +29,14 @@
 }
 
 - (UITableView *)createTableViewWithDataSource:(NSArray *)dataSource
+                                     cellClass:(Class)cellClass
                                      rowHeight:(CGFloat)rowHeight
                                  inController:(UIViewController *)controller
                             didSelectRowBlock:(didSelectRowHandleBlock)didSelectRowBlock
                                didScrollBlock:(didScrollHandleBlock)didScrollBlock{
     
     self.dataSource = [NSMutableArray arrayWithArray:dataSource];
+    self.cellCalss = cellClass;
     self.didselectRowBlock = didSelectRowBlock;
     self.didScrollBlock = didScrollBlock;
     
@@ -53,7 +56,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString * cellId = @"YJTableViewGeneratorCellId";
+    NSString * cellId = NSStringFromClass(self.cellCalss);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
